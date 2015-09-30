@@ -17,7 +17,6 @@
 #include <ngx_thread_pool.h>
 #endif
 
-
 #define NGX_HTTP_GZIP_PROXIED_OFF       0x0002
 #define NGX_HTTP_GZIP_PROXIED_EXPIRED   0x0004
 #define NGX_HTTP_GZIP_PROXIED_NO_CACHE  0x0008
@@ -108,6 +107,11 @@ typedef struct {
 #endif
 #if (NGX_HAVE_DEFERRED_ACCEPT && defined TCP_DEFER_ACCEPT)
     ngx_uint_t                 deferred_accept;
+#endif
+
+#ifdef NGX_RLITE
+    char                       *rina_appl_name;
+    char                       *rina_dif_name;
 #endif
 
     u_char                     addr[NGX_SOCKADDR_STRLEN + 1];

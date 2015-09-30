@@ -50,7 +50,7 @@ ngx_event_connect_peer(ngx_peer_connection_t *pc)
     }
 
     if (pc->rcvbuf) {
-        if (setsockopt(s, SOL_SOCKET, SO_RCVBUF,
+        if (ngx_setsockopt(s, SOL_SOCKET, SO_RCVBUF,
                        (const void *) &pc->rcvbuf, sizeof(int)) == -1)
         {
             ngx_log_error(NGX_LOG_ALERT, pc->log, ngx_socket_errno,
@@ -67,7 +67,11 @@ ngx_event_connect_peer(ngx_peer_connection_t *pc)
     }
 
     if (pc->local) {
-        if (bind(s, pc->local->sockaddr, pc->local->socklen) == -1) {
+        if (ngx_bind(s,
+#ifdef NGX_RLITE
+                     NULL, NULL,
+#endif
+                     pc->local->sockaddr, pc->local->socklen) == -1) {
             ngx_log_error(NGX_LOG_CRIT, pc->log, ngx_socket_errno,
                           "bind(%V) failed", &pc->local->name);
 

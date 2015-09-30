@@ -31,6 +31,29 @@ ngx_unix_send(ngx_connection_t *c, u_char *buf, size_t size)
 #endif
 
     for ( ;; ) {
+#ifdef NGX_RLITE
+        if (c->sockaddr->sa_family == AF_INET) {
+            for (n = 0; n < (ssize_t)size;) {
+                int slice = size - n;
+
+                if (slice > NGX_RLITE_MAX_SDU_LEN) {
+                    slice = NGX_RLITE_MAX_SDU_LEN;
+                }
+
+                slice = write(c->fd, buf + n, slice);
+                rl_log(0, "send(fd=%d,ofs=%d,size=%u) --> %d",
+                       c->fd, n, size, slice);
+                if (slice < 0) {
+                    if (n == 0) {
+                        n = slice;
+                    }
+                    break;
+                }
+
+                n += slice;
+            }
+        } else
+#endif /* NGX_RLITE */
         n = send(c->fd, buf, size, 0);
 
         ngx_log_debug3(NGX_LOG_DEBUG_EVENT, c->log, 0,

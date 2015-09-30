@@ -49,6 +49,12 @@ ngx_unix_recv(ngx_connection_t *c, u_char *buf, size_t size)
     }
 
     do {
+#ifdef NGX_RLITE
+        if (c->sockaddr->sa_family == AF_INET) {
+            n = read(c->fd, buf, size);
+            rl_log(0, "recv(%d,%d) --> %d", c->fd, size, n);
+        } else
+#endif /* NGX_RLITE */
         n = recv(c->fd, buf, size, 0);
 
         ngx_log_debug3(NGX_LOG_DEBUG_EVENT, c->log, 0,
@@ -136,6 +142,12 @@ ngx_unix_recv(ngx_connection_t *c, u_char *buf, size_t size)
     rev = c->read;
 
     do {
+#ifdef NGX_RLITE
+        if (c->sockaddr->sa_family == AF_INET) {
+            n = read(c->fd, buf, size);
+            rl_log(0, "recv(%d,%d) --> %d", c->fd, size, n);
+        } else
+#endif /* NGX_RLITE */
         n = recv(c->fd, buf, size, 0);
 
         ngx_log_debug3(NGX_LOG_DEBUG_EVENT, c->log, 0,

@@ -1,3 +1,3 @@
 #!/bin/bash
 
-objs/nginx -s quit
+sudo objs/nginx -s quit

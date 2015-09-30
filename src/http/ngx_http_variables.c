@@ -1024,7 +1024,8 @@ ngx_http_variable_tcpinfo(ngx_http_request_t *r, ngx_http_variable_value_t *v,
     uint32_t         value;
 
     len = sizeof(struct tcp_info);
-    if (getsockopt(r->connection->fd, IPPROTO_TCP, TCP_INFO, &ti, &len) == -1) {
+    if (ngx_getsockopt(r->connection->fd, IPPROTO_TCP, TCP_INFO, &ti, &len)
+            == -1) {
         v->not_found = 1;
         return NGX_OK;
     }

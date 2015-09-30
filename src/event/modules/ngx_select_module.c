@@ -367,7 +367,7 @@ ngx_select_repair_fd_sets(ngx_cycle_t *cycle)
 
         len = sizeof(int);
 
-        if (getsockopt(s, SOL_SOCKET, SO_TYPE, &n, &len) == -1) {
+        if (ngx_getsockopt(s, SOL_SOCKET, SO_TYPE, &n, &len) == -1) {
             err = ngx_socket_errno;
 
             ngx_log_error(NGX_LOG_ALERT, cycle->log, err,
@@ -385,7 +385,7 @@ ngx_select_repair_fd_sets(ngx_cycle_t *cycle)
 
         len = sizeof(int);
 
-        if (getsockopt(s, SOL_SOCKET, SO_TYPE, &n, &len) == -1) {
+        if (ngx_getsockopt(s, SOL_SOCKET, SO_TYPE, &n, &len) == -1) {
             err = ngx_socket_errno;
 
             ngx_log_error(NGX_LOG_ALERT, cycle->log, err,

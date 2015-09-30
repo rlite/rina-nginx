@@ -45,6 +45,8 @@ EVENT_AIO=NO
 
 USE_THREADS=NO
 
+USE_RLITE=YES
+
 NGX_FILE_AIO=NO
 NGX_IPV6=NO
 
@@ -191,6 +193,9 @@ do
         --with-aio_module)               EVENT_AIO=YES              ;;
 
         --with-threads)                  USE_THREADS=YES            ;;
+
+        --with-rlite)                    USE_RLITE=YES              ;;
+        --without-rlite)                 USE_RLITE=NO               ;;
 
         --with-file-aio)                 NGX_FILE_AIO=YES           ;;
         --with-ipv6)                     NGX_IPV6=YES               ;;

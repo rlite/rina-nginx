@@ -61,13 +61,13 @@ ngx_event_accept(ngx_event_t *ev)
 
 #if (NGX_HAVE_ACCEPT4)
         if (use_accept4) {
-            s = accept4(lc->fd, (struct sockaddr *) sa, &socklen,
+            s = ngx_accept4(lc->fd, (struct sockaddr *) sa, &socklen,
                         SOCK_NONBLOCK);
         } else {
-            s = accept(lc->fd, (struct sockaddr *) sa, &socklen);
+            s = ngx_accept(lc->fd, (struct sockaddr *) sa, &socklen);
         }
 #else
-        s = accept(lc->fd, (struct sockaddr *) sa, &socklen);
+        s = ngx_accept(lc->fd, (struct sockaddr *) sa, &socklen);
 #endif
 
         if (s == (ngx_socket_t) -1) {

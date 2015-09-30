@@ -15,6 +15,7 @@
     --http-fastcgi-temp-path=/var/lib/nginx/fastcgi \
     --http-scgi-temp-path=/var/lib/nginx/scgi \
     --http-uwsgi-temp-path=/var/lib/nginx/uwsgi \
+    --with-rlite \
     --with-imap \
     --with-imap_ssl_module \
     --with-ipv6 \

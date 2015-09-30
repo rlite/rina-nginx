@@ -7,6 +7,10 @@ echo
 echo "Configuration summary"
 
 
+if [ $USE_RLITE = YES ]; then
+    echo "  + using rlite"
+fi
+
 if [ $USE_THREADS = YES ]; then
     echo "  + using threads"
 fi

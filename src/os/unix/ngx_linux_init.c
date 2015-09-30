@@ -20,7 +20,7 @@ static ngx_os_io_t ngx_linux_io = {
     ngx_readv_chain,
     ngx_udp_unix_recv,
     ngx_unix_send,
-#if (NGX_HAVE_SENDFILE)
+#if (!defined(NGX_RLITE) && NGX_HAVE_SENDFILE)
     ngx_linux_sendfile_chain,
     NGX_IO_SENDFILE
 #else
@@ -28,7 +28,6 @@ static ngx_os_io_t ngx_linux_io = {
     0
 #endif
 };
-
 
 ngx_int_t
 ngx_os_specific_init(ngx_log_t *log)

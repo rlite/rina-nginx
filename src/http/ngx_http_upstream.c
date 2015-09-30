@@ -1204,7 +1204,7 @@ ngx_http_upstream_check_broken_connection(ngx_http_request_t *r,
          * Solaris returns -1 and sets errno
          */
 
-        if (getsockopt(c->fd, SOL_SOCKET, SO_ERROR, (void *) &err, &len)
+        if (ngx_getsockopt(c->fd, SOL_SOCKET, SO_ERROR, (void *) &err, &len)
             == -1)
         {
             err = ngx_socket_errno;
@@ -1493,7 +1493,7 @@ ngx_http_upstream_ssl_init_connection(ngx_http_request_t *r,
 
             tcp_nodelay = 1;
 
-            if (setsockopt(c->fd, IPPROTO_TCP, TCP_NODELAY,
+            if (ngx_setsockopt(c->fd, IPPROTO_TCP, TCP_NODELAY,
                            (const void *) &tcp_nodelay, sizeof(int)) == -1)
             {
                 ngx_connection_error(c, ngx_socket_errno,
@@ -1882,7 +1882,7 @@ ngx_http_upstream_send_request_body(ngx_http_request_t *r,
 
             tcp_nodelay = 1;
 
-            if (setsockopt(c->fd, IPPROTO_TCP, TCP_NODELAY,
+            if (ngx_setsockopt(c->fd, IPPROTO_TCP, TCP_NODELAY,
                            (const void *) &tcp_nodelay, sizeof(int)) == -1)
             {
                 ngx_connection_error(c, ngx_socket_errno,
@@ -2400,7 +2400,7 @@ ngx_http_upstream_test_connect(ngx_connection_t *c)
          * Solaris returns -1 and sets errno
          */
 
-        if (getsockopt(c->fd, SOL_SOCKET, SO_ERROR, (void *) &err, &len)
+        if (ngx_getsockopt(c->fd, SOL_SOCKET, SO_ERROR, (void *) &err, &len)
             == -1)
         {
             err = ngx_socket_errno;
@@ -2708,7 +2708,7 @@ ngx_http_upstream_send_response(ngx_http_request_t *r, ngx_http_upstream_t *u)
 
             tcp_nodelay = 1;
 
-            if (setsockopt(c->fd, IPPROTO_TCP, TCP_NODELAY,
+            if (ngx_setsockopt(c->fd, IPPROTO_TCP, TCP_NODELAY,
                                (const void *) &tcp_nodelay, sizeof(int)) == -1)
             {
                 ngx_connection_error(c, ngx_socket_errno,
@@ -2986,7 +2986,7 @@ ngx_http_upstream_upgrade(ngx_http_request_t *r, ngx_http_upstream_t *u)
         if (c->tcp_nodelay == NGX_TCP_NODELAY_UNSET) {
             ngx_log_debug0(NGX_LOG_DEBUG_HTTP, c->log, 0, "tcp_nodelay");
 
-            if (setsockopt(c->fd, IPPROTO_TCP, TCP_NODELAY,
+            if (ngx_setsockopt(c->fd, IPPROTO_TCP, TCP_NODELAY,
                            (const void *) &tcp_nodelay, sizeof(int)) == -1)
             {
                 ngx_connection_error(c, ngx_socket_errno,
@@ -3002,8 +3002,8 @@ ngx_http_upstream_upgrade(ngx_http_request_t *r, ngx_http_upstream_t *u)
             ngx_log_debug0(NGX_LOG_DEBUG_HTTP, u->peer.connection->log, 0,
                            "tcp_nodelay");
 
-            if (setsockopt(u->peer.connection->fd, IPPROTO_TCP, TCP_NODELAY,
-                           (const void *) &tcp_nodelay, sizeof(int)) == -1)
+            if (ngx_setsockopt(u->peer.connection->fd, IPPROTO_TCP,
+                  TCP_NODELAY, (const void *) &tcp_nodelay, sizeof(int)) == -1)
             {
                 ngx_connection_error(u->peer.connection, ngx_socket_errno,
                                      "setsockopt(TCP_NODELAY) failed");

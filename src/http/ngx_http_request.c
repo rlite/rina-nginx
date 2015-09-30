@@ -2771,7 +2771,7 @@ ngx_http_test_reading(ngx_http_request_t *r)
          * Solaris returns -1 and sets errno
          */
 
-        if (getsockopt(c->fd, SOL_SOCKET, SO_ERROR, (void *) &err, &len)
+        if (ngx_getsockopt(c->fd, SOL_SOCKET, SO_ERROR, (void *) &err, &len)
             == -1)
         {
             err = ngx_socket_errno;
@@ -3022,7 +3022,7 @@ ngx_http_set_keepalive(ngx_http_request_t *r)
     {
         ngx_log_debug0(NGX_LOG_DEBUG_HTTP, c->log, 0, "tcp_nodelay");
 
-        if (setsockopt(c->fd, IPPROTO_TCP, TCP_NODELAY,
+        if (ngx_setsockopt(c->fd, IPPROTO_TCP, TCP_NODELAY,
                        (const void *) &tcp_nodelay, sizeof(int))
             == -1)
         {
@@ -3471,8 +3471,8 @@ ngx_http_free_request(ngx_http_request_t *r, ngx_int_t rc)
             linger.l_onoff = 1;
             linger.l_linger = 0;
 
-            if (setsockopt(r->connection->fd, SOL_SOCKET, SO_LINGER,
-                           (const void *) &linger, sizeof(struct linger)) == -1)
+            if (ngx_setsockopt(r->connection->fd, SOL_SOCKET, SO_LINGER,
+                          (const void *) &linger, sizeof(struct linger)) == -1)
             {
                 ngx_log_error(NGX_LOG_ALERT, log, ngx_socket_errno,
                               "setsockopt(SO_LINGER) failed");

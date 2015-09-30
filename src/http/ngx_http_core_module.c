@@ -4147,6 +4147,18 @@ ngx_http_core_listen(ngx_conf_t *cf, ngx_command_t *cmd, void *conf)
             continue;
         }
 
+#ifdef NGX_RLITE
+        if (ngx_strncmp(value[n].data, "rina_appl_name=", 15) == 0) {
+            lsopt.rina_appl_name = (char *) &value[n].data[15];
+            continue;
+        }
+
+        if (ngx_strncmp(value[n].data, "rina_dif_name=", 14) == 0) {
+            lsopt.rina_dif_name = (char *) &value[n].data[14];
+            continue;
+        }
+#endif
+
         if (ngx_strcmp(value[n].data, "deferred") == 0) {
 #if (NGX_HAVE_DEFERRED_ACCEPT && defined TCP_DEFER_ACCEPT)
             lsopt.deferred_accept = 1;
@@ -4324,6 +4336,13 @@ ngx_http_core_listen(ngx_conf_t *cf, ngx_command_t *cmd, void *conf)
         return NGX_CONF_ERROR;
     }
 
+#ifdef NGX_RLITE
+    if (!lsopt.rina_appl_name || !lsopt.rina_dif_name) {
+        ngx_conf_log_error(NGX_LOG_EMERG, cf, 0,
+                           "Missing RINA naming configuration");
+        return NGX_CONF_ERROR;
+    }
+#endif
     if (ngx_http_add_listen(cf, cscf, &lsopt) == NGX_OK) {
         return NGX_CONF_OK;
     }

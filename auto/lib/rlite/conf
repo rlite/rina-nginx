@@ -1,0 +1,35 @@
+
+# Copyright (C) Vincenzo Maffione
+
+
+if [ $USE_RLITE = YES ]; then
+    FOUND=NO
+
+    # FreeBSD, Solaris, Linux
+
+    ngx_feature="rlite library"
+    ngx_feature_name="NGX_RLITE"
+    ngx_feature_run=no
+    ngx_feature_incs="#include <rlite/rlite.h>"
+    ngx_feature_path=
+    ngx_feature_libs="-lrlite"
+    ngx_feature_test="struct rlite_ctrl x; rl_ctrl_init(&x, \"/dev/rlite\")"
+    . auto/feature
+
+    if [ $ngx_found = yes ]; then
+        CORE_LIBS="$CORE_LIBS $ngx_feature_libs"
+        CORE_SRCS="$CORE_SRCS $RLITE_SRCS"
+        FOUND=YES
+    fi
+
+    if [ $FOUND != YES ]; then
+cat << END
+
+$0: error: rlite library not found
+You can disable the module by using --without-rlite
+
+END
+        exit 1
+    fi
+
+fi

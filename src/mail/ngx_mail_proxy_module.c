@@ -124,7 +124,7 @@ ngx_mail_proxy_init(ngx_mail_session_t *s, ngx_addr_t *peer)
     if (cscf->so_keepalive) {
         keepalive = 1;
 
-        if (setsockopt(s->connection->fd, SOL_SOCKET, SO_KEEPALIVE,
+        if (ngx_setsockopt(s->connection->fd, SOL_SOCKET, SO_KEEPALIVE,
                        (const void *) &keepalive, sizeof(int))
                 == -1)
         {
