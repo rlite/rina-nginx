@@ -13,7 +13,7 @@
 
 
 struct ngx_rlite_dev {
-    struct rlite_ctrl ctrl;
+    struct rl_ctrl ctrl;
     struct list_head node;
 };
 
@@ -83,7 +83,7 @@ rlite_socket(int domain, int type, int protocol)
 
     ret = socket(domain, type, protocol);
 
-    ret = rl_ctrl_init(&dev->ctrl, NULL);
+    ret = rl_ctrl_init(&dev->ctrl, NULL, 0);
     if (ret) {
         free(dev);
     } else {
