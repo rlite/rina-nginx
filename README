@@ -8,3 +8,9 @@ similar to the following one:
 
 where you specify the application name to register and the DIF name
 to register to.
+
+A sample ngnx configuration file, together with the configuration file
+of the gateway is available in the root directory:
+
+- rlite-nginx.conf
+- rlite-gw.conf
