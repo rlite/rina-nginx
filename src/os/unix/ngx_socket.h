@@ -72,8 +72,6 @@ int ngx_tcp_push(ngx_socket_t s);
 
 #else  /* ifdef NGX_RLITE */
 
-void rlite_init(void);
-
 ngx_socket_t rlite_socket(int domain, int type, int protocol);
 int rlite_nonblocking(ngx_socket_t s);
 int rlite_blocking(ngx_socket_t s);

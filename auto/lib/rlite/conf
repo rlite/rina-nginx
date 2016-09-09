@@ -10,10 +10,11 @@ if [ $USE_RLITE = YES ]; then
     ngx_feature="rlite library"
     ngx_feature_name="NGX_RLITE"
     ngx_feature_run=no
-    ngx_feature_incs="#include <rlite/rlite.h>"
+    ngx_feature_incs="#include <stdint.h>
+#include <rlite/api.h>"
     ngx_feature_path=
     ngx_feature_libs="-lrlite"
-    ngx_feature_test="struct rl_ctrl x; rl_ctrl_init(&x, NULL, 0);"
+    ngx_feature_test="rl_open(NULL);"
     . auto/feature
 
     if [ $ngx_found = yes ]; then

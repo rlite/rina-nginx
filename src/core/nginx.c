@@ -299,10 +299,6 @@ main(int argc, char *const *argv)
     ngx_ssl_init(log);
 #endif
 
-#ifdef NGX_RLITE
-    rlite_init();
-#endif
-
     /*
      * init_cycle->log is required for signal handlers and
      * ngx_process_options()
