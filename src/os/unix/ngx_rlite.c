@@ -137,9 +137,7 @@ rlite_bind(ngx_socket_t s, const char *rina_appl_name,
         return -1;
     }
 
-    rlite_blocking(s);
     ret = rl_register(s, rina_dif_name, rina_appl_name);
-    rlite_nonblocking(s);
 
     return ret;
 }
