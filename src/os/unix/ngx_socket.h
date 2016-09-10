@@ -122,8 +122,6 @@ ngx_chain_t *rlite_writev_chain(ngx_connection_t *c, ngx_chain_t *in,
 #define ngx_shutdown_socket_n  "shutdown()"
 #define ngx_close_socket_n  "close() socket"
 
-#define NGX_RLITE_MAX_SDU_LEN   1400
-
 #define RLITE_DEBUG
 #ifdef RLITE_DEBUG
 #define rl_log  ngx_log_stderr

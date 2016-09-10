@@ -186,38 +186,13 @@ ngx_writev(ngx_connection_t *c, ngx_iovec_t *vec)
 
 eintr:
 
+    n = writev(c->fd, vec->iovs, vec->count);
 #ifdef NGX_RLITE
     if (c->sockaddr->sa_family == AF_INET) {
-        unsigned int i;
-        unsigned int ofs;
-
-        for (n = 0, ofs = 0, i = 0; i < vec->count;) {
-            int slice = vec->iovs[i].iov_len - ofs;
-
-            if (slice > NGX_RLITE_MAX_SDU_LEN) {
-                slice = NGX_RLITE_MAX_SDU_LEN;
-            }
-
-            slice = write(c->fd, ((char *)vec->iovs[i].iov_base) + ofs, slice);
-            rl_log(0, "sendv(fd=%d,i=%d,ofs=%d) --> %d",
-                   c->fd, i, ofs, slice);
-            if (slice < 0) {
-                if (n == 0) {
-                    n = slice;
-                }
-                break;
-            }
-
-            n += slice;
-            ofs += slice;
-            if (ofs == vec->iovs[i].iov_len) {
-                ofs = 0;
-                i++;
-            }
-        }
-    } else
+        rl_log(0, "writev(fd=%d,cnt=%d,size=%d) --> %d",
+                c->fd, vec->count, vec->size, n);
+    }
 #endif /* NGX_RLITE */
-    n = writev(c->fd, vec->iovs, vec->count);
 
     ngx_log_debug2(NGX_LOG_DEBUG_EVENT, c->log, 0,
                    "writev: %z of %uz", n, vec->size);

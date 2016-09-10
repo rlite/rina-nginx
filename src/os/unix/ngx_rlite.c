@@ -137,7 +137,9 @@ rlite_bind(ngx_socket_t s, const char *rina_appl_name,
         return -1;
     }
 
+    rlite_blocking(s);
     ret = rl_register(s, rina_dif_name, rina_appl_name);
+    rlite_nonblocking(s);
 
     return ret;
 }
@@ -162,6 +164,11 @@ rlite_accept_intn(ngx_socket_t s, struct sockaddr_in *addr,
     fd = rl_flow_accept(s, NULL);
     if (fd < 0) {
         return fd;
+    }
+
+    {   /* Enable splitted sdu_write hack (max_sdu_size = 1400). */
+        uint8_t data[5]; data[0] = 90; *((uint32_t *)(data+1)) = 1400;
+        ioctl(fd, 0, data);
     }
 
     if (*addrlen < sizeof(struct sockaddr_in)) {
