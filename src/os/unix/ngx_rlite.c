@@ -32,7 +32,7 @@ rlite_socket(int domain, int type, int protocol)
         return socket(domain, type, protocol);
     }
 
-    fd = rl_open(NULL);
+    fd = rina_open();
     rl_log(0, "socket(%d,%d,%d) --> %d", domain, type, protocol, fd);
 
     return fd;
@@ -137,7 +137,7 @@ rlite_bind(ngx_socket_t s, const char *rina_appl_name,
         return -1;
     }
 
-    ret = rl_register(s, rina_dif_name, rina_appl_name);
+    ret = rina_register(s, rina_dif_name, rina_appl_name);
 
     return ret;
 }
@@ -159,7 +159,7 @@ rlite_accept_intn(ngx_socket_t s, struct sockaddr_in *addr,
 {
     int fd;
 
-    fd = rl_flow_accept(s, NULL);
+    fd = rina_flow_accept(s, NULL);
     if (fd < 0) {
         return fd;
     }

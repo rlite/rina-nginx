@@ -14,7 +14,7 @@ if [ $USE_RLITE = YES ]; then
 #include <rlite/api.h>"
     ngx_feature_path=
     ngx_feature_libs="-lrlite"
-    ngx_feature_test="rl_open(NULL);"
+    ngx_feature_test="rina_open();"
     . auto/feature
 
     if [ $ngx_found = yes ]; then
