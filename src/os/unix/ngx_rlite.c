@@ -8,7 +8,7 @@
 #include <ngx_core.h>
 #include <fcntl.h>
 
-#include <rlite/api.h>
+#include <rina/api.h>
 
 static int
 is_socket(ngx_socket_t s)
