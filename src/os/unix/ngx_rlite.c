@@ -159,7 +159,7 @@ rlite_accept_intn(ngx_socket_t s, struct sockaddr_in *addr,
 {
     int fd;
 
-    fd = rina_flow_accept(s, NULL);
+    fd = rina_flow_accept(s, NULL, NULL, 0);
     if (fd < 0) {
         return fd;
     }
