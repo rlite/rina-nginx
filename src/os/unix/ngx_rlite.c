@@ -164,11 +164,6 @@ rlite_accept_intn(ngx_socket_t s, struct sockaddr_in *addr,
         return fd;
     }
 
-    {   /* Enable splitted sdu_write hack (max_sdu_size = 1400). */
-        uint8_t data[5]; data[0] = 90; *((uint32_t *)(data+1)) = 1400;
-        ioctl(fd, 1, data);
-    }
-
     if (*addrlen < sizeof(struct sockaddr_in)) {
         close(fd);
         errno = ENOSPC;
