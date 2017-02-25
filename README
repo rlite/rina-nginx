@@ -4,7 +4,7 @@ Documentation is available at http://nginx.org
 To run it with rlite, use a configuration file with a listen directive
 similar to the following one:
 
-	listen       80 rina_appl_name=nxginx:1 rina_dif_name=n.DIF;
+	listen       80 rina_appl_name=nxginx.1 rina_dif_name=n.DIF;
 
 where you specify the application name to register and the DIF name
 to register to.

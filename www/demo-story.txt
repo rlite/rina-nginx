@@ -11,6 +11,6 @@
   MA (terminale 1).
 - Naviga rapidamente le pagine web, mostrando il funzionamento
 - Scarica il file da 500 MB e mostralo in Thunar
-- Torna al terminale 1 e lancia dropbear -R -D n.1.DIF -A dropbear
+- Torna al terminale 1 e lancia dropbear -R -D n.DIF -A dropbear
 - Apri una connessione ssh verso MB e mostra con flows-show
   che e' in grado di rilevare se stessa
