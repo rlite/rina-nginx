@@ -7,8 +7,8 @@ echo
 echo "Configuration summary"
 
 
-if [ $USE_RLITE = YES ]; then
-    echo "  + using rlite"
+if [ $USE_RINA = YES ]; then
+    echo "  + using rina"
 fi
 
 if [ $USE_THREADS = YES ]; then

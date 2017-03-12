@@ -20,7 +20,7 @@
  * ioctl() in Linux 2.4 and 2.6 uses BKL, however, fcntl(F_SETFL) uses it too.
  */
 
-#ifndef NGX_RLITE
+#ifndef NGX_RINA
 
 
 #if (NGX_HAVE_FIONBIO)
@@ -116,4 +116,4 @@ ngx_tcp_push(ngx_socket_t s)
 
 #endif
 
-#endif /* !NGX_RLITE */
+#endif /* !NGX_RINA */

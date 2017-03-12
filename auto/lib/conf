@@ -82,6 +82,6 @@ if [ $NGX_LIBATOMIC != NO ]; then
     . auto/lib/libatomic/conf
 fi
 
-if [ $USE_RLITE = YES ]; then
-    . auto/lib/rlite/conf
+if [ $USE_RINA = YES ]; then
+    . auto/lib/rina/conf
 fi

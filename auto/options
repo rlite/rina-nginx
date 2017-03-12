@@ -45,7 +45,7 @@ EVENT_AIO=NO
 
 USE_THREADS=NO
 
-USE_RLITE=YES
+USE_RINA=YES
 
 NGX_FILE_AIO=NO
 NGX_IPV6=NO
@@ -194,8 +194,8 @@ do
 
         --with-threads)                  USE_THREADS=YES            ;;
 
-        --with-rlite)                    USE_RLITE=YES              ;;
-        --without-rlite)                 USE_RLITE=NO               ;;
+        --with-rina)                     USE_RINA=YES               ;;
+        --without-rina)                  USE_RINA=NO                ;;
 
         --with-file-aio)                 NGX_FILE_AIO=YES           ;;
         --with-ipv6)                     NGX_IPV6=YES               ;;

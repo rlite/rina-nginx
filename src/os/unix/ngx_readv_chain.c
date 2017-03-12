@@ -104,7 +104,7 @@ ngx_readv_chain(ngx_connection_t *c, ngx_chain_t *chain, off_t limit)
                    "readv: %d, last:%d", vec.nelts, iov->iov_len);
 
     do {
-#ifdef NGX_RLITE
+#ifdef NGX_RINA
         if (c->sockaddr->sa_family == AF_INET) {
             n = readv(c->fd, (struct iovec *) vec.elts, vec.nelts);
             rl_log(0, "readv_chain(%d) --> %d", c->fd, n);

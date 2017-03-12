@@ -410,7 +410,7 @@ ngx_open_listening_sockets(ngx_cycle_t *cycle)
                            "bind() %V #%d ", &ls[i].addr_text, s);
 
             if (ngx_bind(s,
-#ifdef NGX_RLITE
+#ifdef NGX_RINA
                          ls[i].rina_appl_name,
                          ls[i].rina_dif_name,
 #endif

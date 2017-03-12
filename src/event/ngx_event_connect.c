@@ -68,7 +68,7 @@ ngx_event_connect_peer(ngx_peer_connection_t *pc)
 
     if (pc->local) {
         if (ngx_bind(s,
-#ifdef NGX_RLITE
+#ifdef NGX_RINA
                      NULL, NULL,
 #endif
                      pc->local->sockaddr, pc->local->socklen) == -1) {

@@ -109,7 +109,7 @@ typedef struct {
     ngx_uint_t                 deferred_accept;
 #endif
 
-#ifdef NGX_RLITE
+#ifdef NGX_RINA
     char                       *rina_appl_name;
     char                       *rina_dif_name;
 #endif

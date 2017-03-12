@@ -24,7 +24,7 @@ is_socket(ngx_socket_t s)
 }
 
 ngx_socket_t
-rlite_socket(int domain, int type, int protocol)
+rina_socket(int domain, int type, int protocol)
 {
     int fd;
 
@@ -39,7 +39,7 @@ rlite_socket(int domain, int type, int protocol)
 }
 
 int
-rlite_nonblocking(ngx_socket_t s)
+rina_nonblocking(ngx_socket_t s)
 {
     if (!is_socket(s)) {
         rl_log(0, "nonblocking(%d)", s);
@@ -49,7 +49,7 @@ rlite_nonblocking(ngx_socket_t s)
 }
 
 int
-rlite_blocking(ngx_socket_t s)
+rina_blocking(ngx_socket_t s)
 {
     int flags;
 
@@ -68,7 +68,7 @@ rlite_blocking(ngx_socket_t s)
 }
 
 int
-rlite_nopush(ngx_socket_t s)
+rina_nopush(ngx_socket_t s)
 {
     if (is_socket(s)) {
         return 0;
@@ -80,7 +80,7 @@ rlite_nopush(ngx_socket_t s)
 }
 
 int
-rlite_push(ngx_socket_t s)
+rina_push(ngx_socket_t s)
 {
     if (is_socket(s)) {
         return 0;
@@ -92,7 +92,7 @@ rlite_push(ngx_socket_t s)
 }
 
 int
-rlite_shutdown(ngx_socket_t s, int flags)
+rina_shutdown(ngx_socket_t s, int flags)
 {
     if (is_socket(s)) {
         return shutdown(s, flags);
@@ -104,7 +104,7 @@ rlite_shutdown(ngx_socket_t s, int flags)
 }
 
 int
-rlite_close(ngx_socket_t s)
+rina_close(ngx_socket_t s)
 {
     if (!is_socket(s)) {
         rl_log(0, "close(%d)", s);
@@ -114,7 +114,7 @@ rlite_close(ngx_socket_t s)
 }
 
 int
-rlite_bind(ngx_socket_t s, const char *rina_appl_name,
+rina_bind(ngx_socket_t s, const char *rina_appl_name,
            const char *rina_dif_name,
            const struct sockaddr *addr, socklen_t addrlen)
 {
@@ -142,7 +142,7 @@ rlite_bind(ngx_socket_t s, const char *rina_appl_name,
     return ret;
 }
 
-int rlite_listen(ngx_socket_t s, int backlog)
+int rina_listen(ngx_socket_t s, int backlog)
 {
     if (is_socket(s)) {
         return listen(s, backlog);
@@ -154,7 +154,7 @@ int rlite_listen(ngx_socket_t s, int backlog)
 }
 
 static int
-rlite_accept_intn(ngx_socket_t s, struct sockaddr_in *addr,
+rina_accept_intn(ngx_socket_t s, struct sockaddr_in *addr,
                   socklen_t *addrlen)
 {
     int fd;
@@ -180,7 +180,7 @@ rlite_accept_intn(ngx_socket_t s, struct sockaddr_in *addr,
 }
 
 int
-rlite_accept(ngx_socket_t s, struct sockaddr *addr,
+rina_accept(ngx_socket_t s, struct sockaddr *addr,
              socklen_t *addrlen)
 {
     int ret;
@@ -189,7 +189,7 @@ rlite_accept(ngx_socket_t s, struct sockaddr *addr,
         return accept(s, addr, addrlen);
     }
 
-    ret = rlite_accept_intn(s, (struct sockaddr_in *)addr, addrlen);
+    ret = rina_accept_intn(s, (struct sockaddr_in *)addr, addrlen);
 
     rl_log(0, "accept(%d) --> %d", s, ret);
 
@@ -197,7 +197,7 @@ rlite_accept(ngx_socket_t s, struct sockaddr *addr,
 }
 
 int
-rlite_accept4(ngx_socket_t s, struct sockaddr *addr,
+rina_accept4(ngx_socket_t s, struct sockaddr *addr,
               socklen_t *addrlen, int flags)
 {
     int ret;
@@ -206,7 +206,7 @@ rlite_accept4(ngx_socket_t s, struct sockaddr *addr,
         return accept4(s, addr, addrlen, flags);
     }
 
-    ret = rlite_accept_intn(s, (struct sockaddr_in *)addr, addrlen);
+    ret = rina_accept_intn(s, (struct sockaddr_in *)addr, addrlen);
 
     rl_log(0, "accept4(%d) --> %d", s, ret);
 
@@ -214,7 +214,7 @@ rlite_accept4(ngx_socket_t s, struct sockaddr *addr,
 }
 
 int
-rlite_getsockopt(ngx_socket_t s, int level, int optname,
+rina_getsockopt(ngx_socket_t s, int level, int optname,
                  void *optval, socklen_t *optlen)
 {
     if (is_socket(s)) {
@@ -227,7 +227,7 @@ rlite_getsockopt(ngx_socket_t s, int level, int optname,
 }
 
 int
-rlite_setsockopt(ngx_socket_t s, int level, int optname,
+rina_setsockopt(ngx_socket_t s, int level, int optname,
                  const void *optval, socklen_t optlen)
 {
     if (is_socket(s)) {
