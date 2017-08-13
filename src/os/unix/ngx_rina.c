@@ -207,6 +207,9 @@ rina_accept4(ngx_socket_t s, struct sockaddr *addr,
     }
 
     ret = rina_accept_intn(s, (struct sockaddr_in *)addr, addrlen);
+    if (ret >= 0 && flags & SOCK_NONBLOCK) {
+        rina_nonblocking(ret);
+    }
 
     rl_log(0, "accept4(%d) --> %d", s, ret);
 
