@@ -34,3 +34,5 @@
     --with-http_mp4_module \
     --with-http_secure_link_module \
     --with-http_sub_module
+
+#    --with-openssl=/home/vmaffione/asp/openssl-1.0/src/openssl-1.0.2l
