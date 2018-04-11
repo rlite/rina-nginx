@@ -885,7 +885,7 @@ ngx_send_lowat(ngx_connection_t *c, size_t lowat)
 
     sndlowat = (int) lowat;
 
-    if (setsockopt(c->fd, SOL_SOCKET, SO_SNDLOWAT,
+    if (ngx_setsockopt(c->fd, SOL_SOCKET, SO_SNDLOWAT,
                    (const void *) &sndlowat, sizeof(int))
         == -1)
     {

@@ -62,12 +62,12 @@ ngx_event_accept(ngx_event_t *ev)
 
 #if (NGX_HAVE_ACCEPT4)
         if (use_accept4) {
-            s = accept4(lc->fd, &sa.sockaddr, &socklen, SOCK_NONBLOCK);
+            s = ngx_accept4(lc->fd, &sa.sockaddr, &socklen, SOCK_NONBLOCK);
         } else {
-            s = accept(lc->fd, &sa.sockaddr, &socklen);
+            s = ngx_accept(lc->fd, &sa.sockaddr, &socklen);
         }
 #else
-        s = accept(lc->fd, &sa.sockaddr, &socklen);
+        s = ngx_accept(lc->fd, &sa.sockaddr, &socklen);
 #endif
 
         if (s == (ngx_socket_t) -1) {

@@ -101,6 +101,11 @@ typedef struct {
     char                      *accept_filter;
 #endif
 
+#ifdef NGX_RINA
+    char                       *rina_appl_name;
+    char                       *rina_dif_name;
+#endif
+
     u_char                     addr[NGX_SOCKADDR_STRLEN + 1];
 } ngx_http_listen_opt_t;
 

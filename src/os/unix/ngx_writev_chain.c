@@ -187,6 +187,13 @@ ngx_writev(ngx_connection_t *c, ngx_iovec_t *vec)
 eintr:
 
     n = writev(c->fd, vec->iovs, vec->count);
+#ifdef NGX_RINA
+    if (c->sockaddr->sa_family == AF_INET) {
+       rl_log(0, "writev(fd=%d,cnt=%d,size=%d) --> %d",
+                c->fd, vec->count, vec->size, n);
+    }
+#endif /* NGX_RINA */
+
 
     ngx_log_debug2(NGX_LOG_DEBUG_EVENT, c->log, 0,
                    "writev: %z of %uz", n, vec->size);

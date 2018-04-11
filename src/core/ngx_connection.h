@@ -87,6 +87,11 @@ struct ngx_listening_s {
     int                 fastopen;
 #endif
 
+#ifdef NGX_RINA
+    char               *rina_appl_name;
+    char               *rina_dif_name;
+#endif
+
 };
 
 

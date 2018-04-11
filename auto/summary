@@ -11,6 +11,10 @@ if [ $USE_THREADS = YES ]; then
     echo "  + using threads"
 fi
 
+if [ $USE_RINA = YES ]; then
+    echo "  + using rina"
+fi
+
 if [ $USE_PCRE = DISABLED ]; then
     echo "  + PCRE library is disabled"
 

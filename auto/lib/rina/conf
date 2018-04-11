@@ -1,0 +1,36 @@
+
+# Copyright (C) Vincenzo Maffione
+
+
+if [ $USE_RINA = YES ]; then
+    FOUND=NO
+
+    # FreeBSD, Solaris, Linux
+
+    ngx_feature="rina library"
+    ngx_feature_name="NGX_RINA"
+    ngx_feature_run=no
+    ngx_feature_incs="#include <stdint.h>
+#include <rina/api.h>"
+    ngx_feature_path=
+    ngx_feature_libs="-lrina-api"
+    ngx_feature_test="rina_open();"
+    . auto/feature
+
+    if [ $ngx_found = yes ]; then
+        CORE_LIBS="$CORE_LIBS $ngx_feature_libs"
+        CORE_SRCS="$CORE_SRCS $RINA_SRCS"
+        FOUND=YES
+    fi
+
+    if [ $FOUND != YES ]; then
+cat << END
+
+$0: error: rina-api library not found
+You can disable the module by using --without-rina
+
+END
+        exit 1
+    fi
+
+fi

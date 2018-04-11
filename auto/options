@@ -43,6 +43,8 @@ EVENT_POLL=NO
 
 USE_THREADS=NO
 
+USE_RINA=YES
+
 NGX_FILE_AIO=NO
 
 HTTP=YES
@@ -201,6 +203,9 @@ do
         --without-poll_module)           EVENT_POLL=NONE            ;;
 
         --with-threads)                  USE_THREADS=YES            ;;
+
+        --with-rina)                     USE_RINA=YES               ;;
+        --without-rina)                  USE_RINA=NO                ;;
 
         --with-file-aio)                 NGX_FILE_AIO=YES           ;;
 

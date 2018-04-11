@@ -750,7 +750,7 @@ ngx_stream_proxy_init_upstream(ngx_stream_session_t *s)
 
         tcp_nodelay = 1;
 
-        if (setsockopt(pc->fd, IPPROTO_TCP, TCP_NODELAY,
+        if (ngx_setsockopt(pc->fd, IPPROTO_TCP, TCP_NODELAY,
                        (const void *) &tcp_nodelay, sizeof(int)) == -1)
         {
             ngx_connection_error(pc, ngx_socket_errno,

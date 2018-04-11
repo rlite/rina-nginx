@@ -20,6 +20,7 @@
  * ioctl() in Linux 2.4 and 2.6 uses BKL, however, fcntl(F_SETFL) uses it too.
  */
 
+#ifndef NGX_RINA
 
 #if (NGX_HAVE_FIONBIO)
 
@@ -56,7 +57,7 @@ ngx_tcp_nopush(ngx_socket_t s)
 
     tcp_nopush = 1;
 
-    return setsockopt(s, IPPROTO_TCP, TCP_NOPUSH,
+    return ngx_setsockopt(s, IPPROTO_TCP, TCP_NOPUSH,
                       (const void *) &tcp_nopush, sizeof(int));
 }
 
@@ -68,7 +69,7 @@ ngx_tcp_push(ngx_socket_t s)
 
     tcp_nopush = 0;
 
-    return setsockopt(s, IPPROTO_TCP, TCP_NOPUSH,
+    return ngx_setsockopt(s, IPPROTO_TCP, TCP_NOPUSH,
                       (const void *) &tcp_nopush, sizeof(int));
 }
 
@@ -82,7 +83,7 @@ ngx_tcp_nopush(ngx_socket_t s)
 
     cork = 1;
 
-    return setsockopt(s, IPPROTO_TCP, TCP_CORK,
+    return ngx_setsockopt(s, IPPROTO_TCP, TCP_CORK,
                       (const void *) &cork, sizeof(int));
 }
 
@@ -94,7 +95,7 @@ ngx_tcp_push(ngx_socket_t s)
 
     cork = 0;
 
-    return setsockopt(s, IPPROTO_TCP, TCP_CORK,
+    return ngx_setsockopt(s, IPPROTO_TCP, TCP_CORK,
                       (const void *) &cork, sizeof(int));
 }
 
@@ -114,3 +115,5 @@ ngx_tcp_push(ngx_socket_t s)
 }
 
 #endif
+
+#endif /* NGX_RINA */

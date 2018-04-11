@@ -1775,6 +1775,11 @@ ngx_http_add_listening(ngx_conf_t *cf, ngx_http_conf_addr_t *addr)
     ls->reuseport = addr->opt.reuseport;
 #endif
 
+#ifdef NGX_RINA
+    ls->rina_appl_name = addr->opt.rina_appl_name;
+    ls->rina_dif_name = addr->opt.rina_dif_name;
+#endif
+
     return ls;
 }
 

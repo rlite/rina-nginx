@@ -535,7 +535,7 @@ ngx_http_v2_send_output_queue(ngx_http_v2_connection_t *h2c)
     {
         ngx_log_debug0(NGX_LOG_DEBUG_HTTP, c->log, 0, "tcp_nodelay");
 
-        if (setsockopt(c->fd, IPPROTO_TCP, TCP_NODELAY,
+        if (ngx_setsockopt(c->fd, IPPROTO_TCP, TCP_NODELAY,
                        (const void *) &tcp_nodelay, sizeof(int))
             == -1)
         {

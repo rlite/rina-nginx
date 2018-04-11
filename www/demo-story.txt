@@ -1,0 +1,16 @@
+- Apri MA nel terminale 1
+- Lancia nginx con ./start.sh, spiegando il significato delle
+  operazioni server-side
+- Apri MB nel terminale 2
+- Mostra la RIB per far vedere l'applicazione registrata
+- Lancia rina-gw, spiegando il significato della configurazione
+- Spiega la redirezione di porte TCP effettuata da QEMU, e di
+  come questo sia scorrelato dal significato della demo
+- Carica la pagina principale in Chromium, mostrando prima qual
+  e' l'effetto su MB (terminale 2), e poi qual e' l'effetto su
+  MA (terminale 1).
+- Naviga rapidamente le pagine web, mostrando il funzionamento
+- Scarica il file da 500 MB e mostralo in Thunar
+- Torna al terminale 1 e lancia dropbear -R -D n.DIF -A dropbear
+- Apri una connessione ssh verso MB e mostra con flows-show
+  che e' in grado di rilevare se stessa

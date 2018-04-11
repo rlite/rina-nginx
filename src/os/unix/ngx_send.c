@@ -31,6 +31,12 @@ ngx_unix_send(ngx_connection_t *c, u_char *buf, size_t size)
 #endif
 
     for ( ;; ) {
+#ifdef NGX_RINA
+        if (c->sockaddr->sa_family == AF_INET) {
+            n = write(c->fd, buf, size);
+            rl_log(0, "write(fd=%d,size=%u) --> %d", c->fd, size, n);
+        } else
+#endif /* NGX_RINA */
         n = send(c->fd, buf, size, 0);
 
         ngx_log_debug3(NGX_LOG_DEBUG_EVENT, c->log, 0,

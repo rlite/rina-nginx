@@ -1,3 +1,19 @@
 
 Documentation is available at http://nginx.org
 
+To run it with rlite (or IRATI), use a configuration file with a listen
+directive similar to the following one:
+
+	listen       80 rina_appl_name=nxginx.1 rina_dif_name=n.DIF;
+
+where you specify the application name to register and the DIF name
+to register to.
+
+A sample ngnx configuration file, together with the configuration file
+of the gateway is available in the root directory:
+
+- rlite-nginx.conf
+- rina-gw.conf
+
+To enable/disable RINA-related nginx logs, define or undefine the
+RINA_DEBUG macro in src/os/unix/ngx_socket.h.

@@ -327,7 +327,7 @@ ngx_stream_core_content_phase(ngx_stream_session_t *s,
 
         tcp_nodelay = 1;
 
-        if (setsockopt(c->fd, IPPROTO_TCP, TCP_NODELAY,
+        if (ngx_setsockopt(c->fd, IPPROTO_TCP, TCP_NODELAY,
                        (const void *) &tcp_nodelay, sizeof(int)) == -1)
         {
             ngx_connection_error(c, ngx_socket_errno,
