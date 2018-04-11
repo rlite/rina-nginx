@@ -38,9 +38,10 @@
   --with-mail_ssl_module \
   --with-pcre-jit \
   --with-stream \
-  --with-stream_geoip_module \
   --with-stream_realip_module \
   --with-stream_ssl_module \
   --with-stream_ssl_preread_module \
   --with-threads \
   --with-rina
+
+#  --with-stream_geoip_module \
