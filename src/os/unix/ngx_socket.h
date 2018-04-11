@@ -126,7 +126,7 @@ ngx_chain_t *rina_writev_chain(ngx_connection_t *c, ngx_chain_t *in,
 #ifdef RINA_DEBUG
 #define rl_log  ngx_log_stderr
 #else
-#define rl_log
+#define rl_log(x, y, ...)
 #endif
 
 #endif /* NGX_RINA */
