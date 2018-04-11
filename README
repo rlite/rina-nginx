@@ -1,7 +1,13 @@
 
 Documentation is available at http://nginx.org
 
-To run it with rlite (or IRATI), use a configuration file with a listen
+To build and install for RINA (e.g., rlite or IRATI), run
+
+    $ ./conf.sh
+    $ make
+    $ sudo make install
+
+To run it with RINA, use a configuration file with a listen
 directive similar to the following one:
 
 	listen       80 rina_appl_name=nxginx.1 rina_dif_name=n.DIF;
@@ -15,5 +21,17 @@ of the gateway is available in the root directory:
 - rlite-nginx.conf
 - rina-gw.conf
 
+To install the configuration files:
+
+    $ sudo cp rlite-nginx.conf /etc/nginx/nginx.conf
+    $ sudo cp rina-gw.conf /etc/rina/
+
 To enable/disable RINA-related nginx logs, define or undefine the
 RINA_DEBUG macro in src/os/unix/ngx_socket.h.
+
+The start.sh script can be used to run the locally built nginx binary
+
+    $ ./start.sh
+
+The first time starting nginx may fail because of some missing directory.
+Just follow the indications and create them.
