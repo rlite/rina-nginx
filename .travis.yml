@@ -1,0 +1,18 @@
+dist: trusty
+sudo: required
+language: c
+
+before_install:
+  - sudo apt-get -qq update
+  - sudo apt-get install -y gcc g++ libprotobuf-dev protobuf-compiler cmake libgeoip-dev
+
+script:
+  - "pushd ."
+  - "git clone https://github.com/rlite/rlite"
+  - "cd rlite && ./configure --no-kernel && make usr && sudo make usr_install"
+  - "popd"
+  - "pushd ."
+  - "./conf.sh"
+  - "make"
+  - "sudo make install"
+  - "popd"
